@@ -1,13 +1,14 @@
 // 黑客攻击系统，对输入的用户名，密码检查是否正确
 // 优化1：输入的用户名与密码不正确，就再次输入用户名与密码
 // 优化2：用户名/密码5次输入错误，就禁止再次输入
+// 优化：将“登录”功能封装乘1个函数login
 #include<iostream>
 #include<string>
-#include<Windows.h>
+#include<windows.h>
 
 using namespace std;
 
-int main(){
+void login(){// 将“登录”封装成1个函数
     string name,pwd;//定义用户名，密码变量
 
     while(1){
@@ -27,12 +28,30 @@ int main(){
         }
     }
 
-        cout<<"1-网站 404攻击"<<endl;
-        cout<<"2-网站篡改攻击"<<endl;
-        cout<<"3-网站攻击修复"<<endl;
-        cout<<"4-查看攻击记录"<<endl;
-        cout<<"5-DNS攻击"<<endl;
+}
 
+int main(){
+      int n;
+      cout<<"请输入n: ";
+      cin>>n;
+
+      if(cin.fail()){
+          cout<<"输入内容类型与预期内容类型不符！"<<endl;
+      }
+      else{
+          cout<<"success!"<<endl;
+      }
+
+      if(1==n)
+/*
+     login();// 登录
+     system("cls");//清屏
+     cout<<"1-网站 404攻击"<<endl;
+     cout<<"2-网站篡改攻击"<<endl;
+     cout<<"3-网站攻击修复"<<endl;
+     cout<<"4-查看攻击记录"<<endl;
+     cout<<"5-DNS攻击"<<endl;
+*/
 return 0;
 }
 
