@@ -2,11 +2,16 @@
 // 优化1：输入的用户名与密码不正确，就再次输入用户名与密码
 // 优化2：用户名/密码5次输入错误，就禁止再次输入
 // 优化：将“登录”功能封装乘1个函数login
+// 优化：设置终端窗口  菜单居中显示  在菜单上方打印标题
+//
 #include<iostream>
 #include<string>
 #include<windows.h>
 
 using namespace std;
+
+#define WIDTH 40
+#define HEIGHT 15
 
 void login(){// 将“登录”封装成1个函数
     string name,pwd;//定义用户名，密码变量
@@ -30,19 +35,143 @@ void login(){// 将“登录”封装成1个函数
 
 }
 
+void titleShow(string title){
+    int i,left;
+    left = (WIDTH - title.length())/2;//一行，左边留空长度
+
+    for(i=0;i<left;i++){
+        cout<<" ";
+    }
+
+    cout<<title<<endl;
+
+}
+
+void menuShow(){//将菜单显示封装成1个函数，便于修改相关输出
+     int maxlen=0;
+     int i,j,len,leftspace;
+     //system("cls");//清屏
+     string menu[]={
+         "1-网站 404攻击",
+         "2-网站篡改攻击",
+         "3-查看攻击记录",
+         "4-网站攻击修复",
+         "5-退出"
+
+     };
+
+     len = sizeof(menu)/sizeof(string);
+
+     for(i=0;i<len;i++){
+        if(menu[i].length()>maxlen){
+            maxlen = menu[i].length();
+        }
+     }
+     // 留空长度要以字符串数组中长度最大的字符串长度为准
+     leftspace = (WIDTH - maxlen)/2;//打印一行，左边留空长度
+
+     for(i=0;i<len;i++){
+        for(j=0;j<leftspace;j++){//打印空格
+            cout<<" ";
+        }
+        cout<<menu[i]<<endl;//打印菜单
+     }
+     /*
+     cout<<"1-网站 404攻击"<<endl;
+     cout<<"2-网站篡改攻击"<<endl;
+     cout<<"3-查看攻击记录"<<endl;//查看攻击记录
+     cout<<"4-网站攻击修复"<<endl;
+     cout<<"5-退出"<<endl;
+     */
+}
+
+int menuchoice(){
+    int choice = 0;//定义返回值
+    //int n;
+
+    while(1){
+          cout<<"请输入chioce: ";
+          cin>>choice;
+
+          if(cin.fail()){
+             cin.clear();//清除错误表示符
+             cin.sync();//清除缓冲区内容
+             cout<<"输入内容类型与预期内容类型不符！"<<endl;
+          }
+          else{
+              break;//跳出循环
+              //cout<<"success!"<<endl;
+          }
+    }
+
+return choice;
+}
+
+void attack404(){// 网站404攻击
+    system("cls");//清屏
+    cout<<"404攻击..."<<endl;
+}
+
+void siteEdit(){
+    system("cls");//清屏
+    cout<<"网站篡改攻击..."<<endl;
+}
+
+void attackRecord(){
+    system("cls");//清屏
+    cout<<"网站攻击记录...."<<endl;
+}
+
+void attackRepair(){
+    system("cls");//清屏
+    cout<<"网站攻击修复..."<<endl;
+}
+
+void init(){// 设置终端窗口大小
+    // mode con cols=40 lines=10
+    char cmd[128];
+    sprintf(cmd,"mode con cols=%d lines=%d",WIDTH,HEIGHT);//将相关内容送到字符串cmd中
+    system(cmd);//为便于修改终端窗口大小，可以使用宏定义
+}
+
 int main(){
       int n;
-      cout<<"请输入n: ";
-      cin>>n;
+      init();//初始化终端窗口大小
+      login();//登录
+      system("cls");
+//cout<<"11"<<endl;
+      titleShow("黑客攻击系统");//显示标题
+//cout<<"22"<<endl;
+      menuShow();//显示功能菜单
 
-      if(cin.fail()){
-          cout<<"输入内容类型与预期内容类型不符！"<<endl;
-      }
-      else{
-          cout<<"success!"<<endl;
+      n = menuchoice();//指定菜单第几项
+
+      switch(n){
+      case 1:
+          attack404();
+          break;
+      case 2:
+          siteEdit();
+          break;
+      case 3:
+          attackRecord();
+          break;
+      case 4:
+          attackRepair();
+          break;
+      case 5:
+          return 0;
+      default:
+          //system("cls");//清屏
+          cout<<"无效输入，请重新输入！"<<endl;
+          break;
+
       }
 
-      if(1==n)
+
+
+
+
 /*
      login();// 登录
      system("cls");//清屏
