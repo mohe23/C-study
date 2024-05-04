@@ -9,16 +9,16 @@ public:
     //complexs(double r=3.15,double i=6.25):re(r),im(i){}
    // complexs():re(5.8),im(0){}
 
-    double real() const {return re;}//返回实部
-    double impl() const {return im;}//返回虚部
+    double real() const {return re;}//杩斿洖瀹為儴
+    double impl() const {return im;}//杩斿洖铏氶儴
 
-    // 相同类下的不同对象，互为友元。也就是说，函数实现中，可以直接通过comp.re访问类的私有成员re
+    // 鐩稿悓绫讳笅鐨勪笉鍚屽璞★紝浜掍负鍙嬪厓銆備篃灏辨槸璇达紝鍑芥暟prit瀹炵幇涓紝鍙互鐩存帴閫氳繃comp.re璁块棶绫荤殑绉佹湁鎴愬憳re
     double prit(complexs comp){
         return comp.re + comp.im;
     }
 
 private:
-    double re,im;//定义复数的实部，虚部
+    double re,im;//瀹氫箟澶嶆暟鐨勫疄閮紝铏氶儴
 };
 
 #endif // COMPLEX_H_INCLUDED
